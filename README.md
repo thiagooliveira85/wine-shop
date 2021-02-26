@@ -17,16 +17,16 @@ alguns "conflitos" de região de atendimento de cada unidade.
 Com o objetivo de atender melhor esses clientes oferecendo apenas uma loja física por
 CEP de entrega, precisamos criar um serviço (API) para realizar as seguintes atividades:
 
-● Criar API REST para cadastrar as faixas de CEP de cada loja;
-● Criar API REST para retornar qual é a loja física que atende determinado CEP;
+#● Criar API REST para cadastrar as faixas de CEP de cada loja;
+#● Criar API REST para retornar qual é a loja física que atende determinado CEP;
 
 ## REGRAS
 
-● A tabela de cadastro de CEP deve possuir as seguintes colunas: ID,
+#● A tabela de cadastro de CEP deve possuir as seguintes colunas: ID,
 CODIGO_LOJA, FAIXA_INICIO e FAIXA_FIM;
-● As faixas de CEP não pode conflitar com as de outras lojas;
-● Deve ser possível editar/excluir uma faixa de CEP;
-● A aplicação deve ser feita em Springboot + REST + JPA/Hibernate
+#● As faixas de CEP não pode conflitar com as de outras lojas;
+#● Deve ser possível editar/excluir uma faixa de CEP;
+#● A aplicação deve ser feita em Springboot + REST + JPA/Hibernate
 
 
 ## Modelo de Arquitetura Aplicado
