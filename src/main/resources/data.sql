@@ -1,0 +1,3 @@
+INSERT INTO TB_LOJA (ID, CODIGO, NOME, ENDERECO) VALUES (1, 'LOJA_PINHEIROS', 'Loja Pinheiros', 'Av. Pedroso de Moraes 55 - Pinheiros - São Paulo - SP');
+INSERT INTO TB_LOJA (ID, CODIGO, NOME, ENDERECO) VALUES (2, 'LOJA_JARDINS', 'Loja Jardins', 'Av. Rebouças 444 - Jardins - São paulo - SP');
+INSERT INTO TB_LOJA (ID, CODIGO, NOME, ENDERECO) VALUES (3, 'LOJA_MOEMA', 'Loja Moema', 'Av. Santo amaro 123 - Moema - São paulo - SP');
