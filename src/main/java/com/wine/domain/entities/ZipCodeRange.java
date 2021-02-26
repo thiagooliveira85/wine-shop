@@ -13,9 +13,7 @@ import javax.persistence.ManyToOne;
 
 import com.wine.application.dtos.PhysicalStoreDto;
 import com.wine.application.dtos.ZipCodeRangeDto;
-import static com.wine.domain.MessagesBusiness.*;
-import com.wine.domain.exceptions.BusinessException;
-import com.wine.domain.utilities.StringUtils;
+import com.wine.domain.business.ZipCodeRangesValidator;
 
 @Entity(name = "TB_FAIXA_CEP")
 public class ZipCodeRange implements Serializable{
@@ -43,7 +41,7 @@ public class ZipCodeRange implements Serializable{
 	public ZipCodeRange() {}
 	
 	public ZipCodeRange(ZipCodeRangeDto zipCodeDto) {
-		this.checkRanges(zipCodeDto);
+		ZipCodeRangesValidator.checkRanges(zipCodeDto);
 		PhysicalStoreDto store = zipCodeDto.getStore();
 		this.physicalStore = new PhysicalStore(store.getId(), store.getStoreCode(), store.getStoreName(), store.getAddress());
 		this.beginTrack = new BigInteger(zipCodeDto.getBeginTrack());
@@ -51,7 +49,7 @@ public class ZipCodeRange implements Serializable{
 	}
 	
 	public ZipCodeRange(Integer id, ZipCodeRangeDto zipCodeDto) {
-		this.checkRanges(zipCodeDto);
+		ZipCodeRangesValidator.checkRanges(zipCodeDto);
 		PhysicalStoreDto store = zipCodeDto.getStore();
 		this.id = id;
 		this.physicalStore = new PhysicalStore(store.getId(), store.getStoreCode(), store.getStoreName(), store.getAddress());
@@ -75,41 +73,4 @@ public class ZipCodeRange implements Serializable{
 		return endTrack;
 	}
 
-	private void checkRanges(ZipCodeRangeDto dto) {
-		
-		if (StringUtils.checkIfIsBlankOrNull(dto.getBeginTrack()))
-			throw new BusinessException(INITIAL_RANGE_NULL);
-		
-		if (StringUtils.checkIfIsBlankOrNull(dto.getEndTrack()))
-			throw new BusinessException(FINAL_RANGE_NULL);
-		
-		if (!StringUtils.checkSizeField(dto.getBeginTrack(), 8))
-			throw new BusinessException(INITIAL_RANGE_INVALID);
-		
-		if (!StringUtils.checkSizeField(dto.getEndTrack(), 8))
-			throw new BusinessException(FINAL_RANGE_INVALID);
-		
-		if (this.checkInvalidDataField(dto.getBeginTrack()))
-			throw new BusinessException(INITIAL_DATA_INVALID);
-		
-		if (this.checkInvalidDataField(dto.getEndTrack()))
-			throw new BusinessException(FINAL_DATA_INVALID);
-		
-		BigInteger begin 	= new BigInteger(dto.getBeginTrack());
-		BigInteger end 		= new BigInteger(dto.getEndTrack());
-		
-		if (begin.compareTo(end) >= 0)
-			throw new BusinessException(INITIAL_RANGE_GREATER_THAN);
-		
-	}
-	
-	private boolean checkInvalidDataField(String s) {
-		try {
-			new BigInteger(s);
-		} catch (Exception e) {
-			return true;
-		}
-		return false;
-	}
-	
 }
