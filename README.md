@@ -34,6 +34,6 @@ Clear Architecture
 
 
 
-## Teste
+## Testes
 
 TDD Junit
